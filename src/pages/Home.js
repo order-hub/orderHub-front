@@ -26,10 +26,18 @@ const Home = () => {
                     </Link>
                 </div>
                 <div className="grid grid-cols-2 gap-4 mt-8">
-                    <div className="bg-gray-100 rounded-lg shadow-md p-4">발주 관리</div>
-                    <div className="bg-gray-100 rounded-lg shadow-md p-4">수불 관리</div>
-                    <div className="bg-gray-100 rounded-lg shadow-md p-4">상품 관리</div>
-                    <div className="bg-gray-100 rounded-lg shadow-md p-4">인력 관리</div>
+                    <Link to="order">
+                        <div className="bg-gray-100 rounded-lg shadow-md p-4">발주 관리</div>
+                    </Link>
+                    <Link to="stock">
+                        <div className="bg-gray-100 rounded-lg shadow-md p-4">수불 관리</div>
+                    </Link>
+                    <Link to="product">
+                        <div className="bg-gray-100 rounded-lg shadow-md p-4">상품 관리</div>
+                    </Link>
+                    <Link to="work">
+                        <div className="bg-gray-100 rounded-lg shadow-md p-4">인력 관리</div>
+                    </Link>
                 </div>
             </div>
         </Layout>
