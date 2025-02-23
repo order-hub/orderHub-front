@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Layout from "../components/layout/Layout";
-import NoticeBoard from "./NoticeBoard";
-import QuestionBoard from "./QuestionBoard";
 import { Link } from "react-router-dom";
 
 
