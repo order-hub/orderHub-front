@@ -18,13 +18,15 @@ const OrderOne = () => {
 
     return(
         <Layout>
-            <div className="flex flex-col w-full p-4 text-2xl">
-                단품 발주
+            <div className="flex flex-col w-full p-4">
+                <div className="flex flex-col w-full p-4 text-2xl">
+                    단품 발주
+                </div>
+                <SearchBar onSearch={handleSearch}></SearchBar>
+                {isSearchOpen && (
+                    <OrderOneSearch onClose={closeModal}>{searchText}</OrderOneSearch>
+                )}
             </div>
-            <SearchBar onSearch={handleSearch}></SearchBar>
-            {isSearchOpen && (
-                <OrderOneSearch onClose={closeModal}>{searchText}</OrderOneSearch>
-            )}
         </Layout>
     );
 };
