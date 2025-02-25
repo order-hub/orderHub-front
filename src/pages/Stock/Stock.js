@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../../components/layout/Layout";
 import MenuButton from "../../components/common/MenuButton";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Stock = () => {
     return (
@@ -21,7 +21,6 @@ const Stock = () => {
                         <MenuButton>오출 확인</MenuButton>
                     </Link>
                 </div>
-                <Outlet></Outlet>
             </div>
         </Layout>
     );

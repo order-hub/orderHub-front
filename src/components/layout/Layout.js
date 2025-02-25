@@ -9,7 +9,9 @@ const Layout = ({ children }) => {
             <Header />
             <div className="flex flex-1">
                 <Sidebar />
-                {children}
+                <div className="flex flex-col w-full p-4">
+                    {children}
+                </div>
             </div>
         </div>
 

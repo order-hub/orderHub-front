@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../../components/layout/Layout";
 import MenuButton from "../../components/common/MenuButton";
-import { Link, Outlet } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 const Order = () => {
     return (
@@ -21,7 +21,6 @@ const Order = () => {
                         <MenuButton>발주 현황 조회</MenuButton>
                     </Link>
                 </div>
-                <Outlet></Outlet>
             </div>
         </Layout>
     );

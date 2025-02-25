@@ -7,7 +7,7 @@ import Order from './pages/Order/Order.js';
 import Product from './pages/Product/Product.js';
 import Work from './pages/Work/Work.js';
 import Stock from './pages/Stock/Stock.js';
-import OrderOne from './pages/Order/OrderOne.js';
+import OrderOne from './pages/Order/OrderOne/OrderOne.js';
 import OrderMiddle from './pages/Order/OrderMiddle.js';
 import OrderView from './pages/Order/OrderView.js';
 import ProductView from './pages/Product/ProductView.js';
@@ -31,24 +31,24 @@ function App() {
           <Route  path="/qna" element={<QuestionBoard />} />    
 
           <Route  path="/order" element={<Order />} />        
-            <Route  path="one" element={<OrderOne />} />    {/* 단품발주 */}
-            <Route  path="middle" element={<OrderMiddle />} />    {/* 중분류 발주 */}
-            <Route  path="view" element={<OrderView />} />    {/* 발주 현황 조회 */}
+          <Route  path="/order/one" element={<OrderOne />} />    {/* 단품발주 */}
+          <Route  path="/order/middle" element={<OrderMiddle />} />    {/* 중분류 발주 */}
+          <Route  path="/order/view" element={<OrderView />} />    {/* 발주 현황 조회 */}
 
           <Route  path="/product" element={<Product />} /> 
-            <Route  path="view" element={<ProductView />} />     {/* 상품 조회 */}
-            <Route  path="register" element={<ProductRegister />} />     {/* 상품 추가 등록 */}
-            <Route  path="update" element={<ProductUpdate />} />     {/* 상품 상태 변경 */}
-            <Route  path="search" element={<ProductSearch />} />     {/* 상품 검색 */}
+          <Route  path="/product/view" element={<ProductView />} />     {/* 상품 조회 */}
+          <Route  path="/product/register" element={<ProductRegister />} />     {/* 상품 추가 등록 */}
+          <Route  path="/product/update" element={<ProductUpdate />} />     {/* 상품 상태 변경 */}
+          <Route  path="/product/search" element={<ProductSearch />} />     {/* 상품 검색 */}
 
           <Route  path="/stock" element={<Stock />} />          
-            <Route  path="view" element={<StockView />} />    {/* 재고 확인 */}
-            <Route  path="miss-order/register" element={<MissOrderRegister />} />    {/* 오출 등록 */}
-            <Route  path="miss-order/view" element={<MissOrderView />} />    {/* 오출 확인 */}
-          
+          <Route  path="/stock/view" element={<StockView />} />    {/* 재고 확인 */}
+          <Route  path="/stock/miss-order/register" element={<MissOrderRegister />} />    {/* 오출 등록 */}
+          <Route  path="/stock/miss-order/view" element={<MissOrderView />} />    {/* 오출 확인 */}
+
           <Route  path="/work" element={<Work />} />  
-            <Route  path="register" element={<WorkRegister />} />  {/* 근무자 추가 */}
-            <Route  path="role-update" element={<WorkRoleUpdate />} />  {/* 권한 변경 */}
+          <Route  path="/work/register" element={<WorkRegister />} />  {/* 근무자 추가 */}
+          <Route  path="/work/role-update" element={<WorkRoleUpdate />} />  {/* 권한 변경 */}
 
         </Routes>
       </BrowserRouter>
