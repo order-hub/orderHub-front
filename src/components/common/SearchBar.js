@@ -1,29 +1,12 @@
-import React, { useState } from "react";
-import Button from "./Button";
+import React from "react";
 
-const SearchBar = ({onSearch}) => {
-    const [searchText, setSearchText] = useState("");
-
-    const handleInputChange = (e) => {
-        setSearchText(e.target.value);
-    };
-
-    const handleSearchClick = () => {
-        if (onSearch) {
-            onSearch(searchText); 
-        }
-        setSearchText("");
-    };
-    
+const SearchBar = ({value, onChange}) => {
     return(
-        <div className="flex m-2 items-center gap-4"> 
-                    <input 
-                    value={searchText}
-                    onChange={handleInputChange}
-                    type="text" 
-                    className="h-10 w-4/5 outline outline-1 mr-2 rounded p-2" />
-                    <Button onClick={handleSearchClick}>검색</Button>
-                </div>
+        <input 
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        type="text" 
+        className="h-10 w-4/5 outline outline-1 mr-2 rounded p-2" />
     );
 };
 

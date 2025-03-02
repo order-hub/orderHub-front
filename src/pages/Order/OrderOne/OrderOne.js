@@ -1,31 +1,40 @@
 import React, {useState} from "react";
 import Layout from "../../../components/layout/Layout";
 import SearchBar from "../../../components/common/SearchBar"
-import OrderOneSearch from "./OrderOneSearch";
+import SearchModal from "../../../components/common/SearchModal";
+import Button from "../../../components/common/Button";
 
 const OrderOne = () => {
-    const [searchText, setSearchText] = useState("");
+    const [productName, setProductName] = useState("");
     const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-    const handleSearch = (text) => {
-        setSearchText(text);
-        setIsSearchOpen(true);
+    const handleProductNameChange = (text) => {
+        setProductName(text);
+        setIsSearchOpen(text.trim() !== "");
     };
 
     const closeModal = () => {
         setIsSearchOpen(false);
     };
 
+    const handleSearchClick = () => {
+        console.log("검색 실행:", {productName });
+        setIsSearchOpen(false);
+        setProductName("");
+    };
     return(
         <Layout>
-            <div className="flex flex-col w-full p-4">
-                <div className="flex flex-col w-full p-4 text-2xl">
+            <div className="flex flex-col w-full">
+                <div className="flex flex-col w-full p-2 text-lg font-bold bg-gray-300">
                     단품 발주
                 </div>
-                <SearchBar onSearch={handleSearch}></SearchBar>
-                {isSearchOpen && (
-                    <OrderOneSearch onClose={closeModal}>{searchText}</OrderOneSearch>
-                )}
+                <div className="relative mt-4 ml-4 items-center">
+                    <SearchBar onChange={handleProductNameChange} value={productName}/>
+                    {isSearchOpen && (
+                        <SearchModal onClose={closeModal}>{productName}</SearchModal>
+                    )}
+                    <Button onClick={handleSearchClick}>검색</Button>
+                </div>
             </div>
         </Layout>
     );
