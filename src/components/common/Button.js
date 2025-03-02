@@ -14,6 +14,7 @@ const StyledButton = styled.button`
   background-color: #E5E7EB; 
   border-radius: 10px;
   height: 40px;
+  white-space: nowrap;
 `;
 
 export default Button;
