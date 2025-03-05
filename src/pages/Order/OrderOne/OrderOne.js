@@ -24,7 +24,7 @@ const OrderOne = () => {
     };
     return(
         <Layout>
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full container">
                 <div className="flex flex-col w-full p-2 text-lg font-bold bg-gray-300">
                     단품 발주
                 </div>

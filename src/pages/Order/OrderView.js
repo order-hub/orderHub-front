@@ -4,7 +4,7 @@ import Layout from "../../components/layout/Layout";
 const OrderView = () => {
     return(
         <Layout>
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full container">
                 <div className="flex flex-col w-full p-2 text-lg font-bold bg-gray-300">
                     발주 현황 조회
                 </div>

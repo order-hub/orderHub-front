@@ -4,7 +4,7 @@ import Layout from "../../components/layout/Layout";
 const OrderMiddle = () => {
     return(
         <Layout>
-            <div className="flex flex-col w-full">    
+            <div className="flex flex-col w-full container">    
                 <div className="flex flex-col w-full p-2 text-lg font-bold bg-gray-300">
                     중분류 발주
                 </div>

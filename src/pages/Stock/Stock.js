@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 const Stock = () => {
     return (
         <Layout>
-            <div className="container p-4">
-                <div className="flex flex-col w-full p-4 text-2xl">
+            <div className="flex flex-col w-full container">
+                <div className="flex flex-col w-full p-2 text-lg font-bold bg-gray-300">
                     수불 관리
                 </div>
                 <div className="grid gap-4 p-4">
