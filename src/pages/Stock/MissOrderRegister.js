@@ -4,7 +4,11 @@ import Layout from "../../components/layout/Layout";
 const MissOrderRegister = () => {
     return(
         <Layout>
-            <div>오출 등록</div>
+            <div className="flex flex-col w-full container">
+                <div className="flex flex-col w-full p-2 text-lg font-bold bg-gray-300">
+                    오출 등록
+                </div>
+            </div>
         </Layout>
     );
 };

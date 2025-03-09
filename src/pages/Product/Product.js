@@ -7,10 +7,10 @@ const Product = () => {
     return (
         <Layout>
             <div className="flex flex-col w-full container">
-                <div className="flex flex-col w-full p-2 text-lg font-bold bg-gray-300">
+                <div className="flex flex-col w-full p-2 text-lg font-bold bg-gray-300 mb-6">
                     상품 관리
                 </div>
-                <div className="grid gap-4 p-4">
+                <div className="grid gap-4 p-4 ml-4">
                     <Link to="view">
                         <MenuButton>상품 조회</MenuButton>
                     </Link>
