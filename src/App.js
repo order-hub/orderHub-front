@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from './pages/Login.js';
 import Home from "./pages/Home.js";
 import NoticeBoard from './pages/NoticeBoard.js';
 import QuestionBoard from './pages/QuestionBoard.js';
@@ -25,6 +26,8 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+          <Route path='/login' element={<Login/>}></Route>
+
           <Route  path="/" element={<Home />} /> 
 
           <Route  path="/notice" element={<NoticeBoard />} />        
