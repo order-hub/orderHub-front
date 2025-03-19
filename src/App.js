@@ -20,6 +20,7 @@ import MissOrderRegister from './pages/Stock/MissOrderRegister.js'
 import MissOrderView from './pages/Stock/MissOrderView.js'
 import WorkRegister from './pages/Work/WorkRegister.js'
 import WorkRoleUpdate from './pages/Work/WorkRoleUpdate.js'
+import ProductCategory from './pages/Product/ProductCategory.js';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route  path="/product/register" element={<ProductRegister />} />     {/* 상품 추가 등록 */}
           <Route  path="/product/update" element={<ProductUpdate />} />     {/* 상품 상태 변경 */}
           <Route  path="/product/search" element={<ProductSearch />} />     {/* 상품 검색 */}
+          <Route  path="/product/category" element={<ProductCategory />} />     {/* 상품 검색 */}
 
           <Route  path="/stock" element={<Stock />} />          
           <Route  path="/stock/view" element={<StockView />} />    {/* 재고 확인 */}
