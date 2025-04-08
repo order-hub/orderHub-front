@@ -12,7 +12,7 @@ const Work = () => {
                 </div>
                 <div className="grid gap-4 p-4 ml-4">
                     <Link to="register">
-                        <MenuButton>근무자 추가</MenuButton>
+                        <MenuButton>근무자 등록</MenuButton>
                     </Link>
                     <Link to="role-update">
                         <MenuButton>권한 변경</MenuButton>

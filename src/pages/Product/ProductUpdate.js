@@ -57,7 +57,7 @@ const ProductUpdate = () => {
         <Layout>
         <div className="flex flex-col w-full container">
             <div className="flex flex-col w-full p-2 text-lg font-bold bg-gray-300">
-                상품 조회
+                상품 상태 변경
             </div>
             <div className="flex w-full gap-4 p-4 items-center">
                 <label htmlFor="productCode" className="whitespace-nowrap mr-2">
