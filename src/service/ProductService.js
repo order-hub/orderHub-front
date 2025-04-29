@@ -25,3 +25,20 @@ export const searchProduct = async (productCode, productName) => {
   const response = await axios.get("http://localhost:8080/api/products/search", { params });
   return response.data; // ProductResponse 객체 반환
 };
+
+
+// 상품 카테고리 등록 API
+export const registerCategory = (categoryData) => {
+  return axios.post("http://localhost:8080/api/categories", categoryData);
+};
+
+// 상품 카테고리 불러오는 API
+export const getAllActiveCategories = async () => {
+  const response = await axios.get("http://localhost:8080/api/categories/active");
+  return response.data; 
+};
+
+// 상품 카테고리 삭제 API
+export const deleteCategory = (categoryId) => {
+  return axios.delete(`http://localhost:8080/api/categories/${categoryId}`);
+};
