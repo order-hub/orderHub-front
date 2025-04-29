@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout/Layout";
 import Button from "../../components/common/Button";
 import SearchBar from "../../components/common/SearchBar";
-import { createProduct } from "../../service/ProductService";
+import { createProduct, getAllActiveCategories } from "../../service/ProductService";
 
 // 초기 state: DTO 구조 그대로 사용
 const INITIAL_STATE = {
@@ -15,6 +15,7 @@ const INITIAL_STATE = {
     productCode: "",      // 추가로 필요한 항목이라 가정 (예시)
     productCount: "",
     productOrderCount: "",
+    
     productOrderDay: "",
   },
 };
@@ -22,6 +23,24 @@ const INITIAL_STATE = {
 const ProductRegister = () => {
   const [productData, setProductData] = useState(INITIAL_STATE);
   const [productImage, setProductImage] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [selectedMajor, setSelectedMajor] = useState(); // 대분류 id
+  const [selectedMiddle, setSelectedMiddle] = useState(); // 중분류 id
+  const [selectedMinor, setSelectedMinor] = useState(); // 소분류 id
+
+
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const categories = await getAllActiveCategories();
+        setCategories(categories);
+        console.log(categories);
+      } catch (e) {
+        console.error("카테고리 불러오기 실패", e);
+      }
+    }
+    fetchCategories();
+  }, []);
 
   /**
    * 상태값 변경 핸들러 (일반 필드)
@@ -98,7 +117,8 @@ const ProductRegister = () => {
       alert("상품 등록 중 오류가 발생했습니다.");
     }
   };
-
+  
+  
   return (
     <Layout>
       <div className="flex flex-col w-full container">
@@ -106,23 +126,73 @@ const ProductRegister = () => {
           상품 등록
         </div>
 
-        {/* 상단 영역: 예시로 "카테고리ID" 정도만 노출 */}
+        {/* 상단 영역*/}
         <div className="flex w-full gap-4 p-4 items-center">
-          <label htmlFor="categoryId" className="whitespace-nowrap mr-2">
-            카테고리ID
-          </label>
-          <div className="relative flex">
-            <SearchBar
-              id="categoryId"
-              value={productData.categoryId}
-              onChange={(val) => handleInputChange("categoryId", val)}
-            />
-          </div>
+          {/* 상품 카테고리 */}
+          <div className="col-span-4 my-2">
+              {/* 대분류 */} 대분류
+              <select
+                value={selectedMajor}
+                onChange={e => {
+                  setSelectedMajor(e.target.value);
+                  setSelectedMiddle("");
+                  setSelectedMinor("");
+                  handleInputChange("categoryId", ""); // 최종 categoryId 초기화
+                }}
+                className="m-4 p-1 outline outline-1 rounded"
+              >
+                <option value="">대분류 선택</option>
+                {categories?.map(cat => (
+                  <option key={cat.id} value={cat.id}>{cat.name}</option>
+                ))}
+              </select>
+
+              {/* 중분류 */} 중분류
+              <select
+                value={selectedMiddle}
+                onChange={e => {
+                  setSelectedMiddle(e.target.value);
+                  setSelectedMinor("");
+                  handleInputChange("categoryId", ""); // 최종 categoryId 초기화
+                }}
+                className="m-4 p-1 outline outline-1 rounded"
+                disabled={!selectedMajor}
+              >
+                <option value="">중분류 선택</option>
+                {selectedMajor &&
+                  categories
+                    .find(cat => String(cat.id) === String(selectedMajor))
+                    ?.children?.map(mid => (
+                      <option key={mid.id} value={mid.id}>{mid.name}</option>
+                    ))}
+              </select>
+
+              {/* 소분류 */} 소분류
+              <select
+                value={selectedMinor}
+                onChange={e => {
+                  setSelectedMinor(e.target.value);
+                  handleInputChange("categoryId", e.target.value); // 최종 categoryId에 소분류 id 저장
+                }}
+                className="m-4 p-1 outline outline-1 rounded"
+                disabled={!selectedMiddle}
+              >
+                <option value="">소분류 선택</option>
+                {selectedMajor && selectedMiddle &&
+                  categories
+                    .find(cat => String(cat.id) === String(selectedMajor))
+                    ?.children?.find(mid => String(mid.id) === String(selectedMiddle))
+                    ?.children?.map(minor => (
+                      <option key={minor.id} value={minor.id}>{minor.name}</option>
+                    ))}
+              </select>
+            </div>
+          
           <Button onClick={handleProductSave}>저장</Button>
         </div>
 
         {/* 본문 */}
-        <div className="w-full h-full p-4 border">
+        <div className="w-full h-full p-4 border flex flex-row">
           {/* 왼쪽: 이미지 업로드 */}
           <div className="flex flex-col w-1/3 items-center justify-center p-4 border-r border-gray-300">
             <p className="mb-2">상품 이미지</p>
@@ -136,7 +206,9 @@ const ProductRegister = () => {
           </div>
 
           {/* 오른쪽: 나머지 정보 */}
-          <div className="flex-1 grid grid-cols-2 gap-x-4 px-4">
+          <div className="flex-1 flex-col grid grid-cols-2 gap-x-4 px-4">
+
+
             {/* 상품명 */}
             <div className="col-span-2 my-2">
               <label className="block mb-1">상품명 (name)</label>
@@ -150,21 +222,34 @@ const ProductRegister = () => {
             {/* 판매상태 (saleStatus) */}
             <div className="col-span-1 my-2">
               <label className="block mb-1">판매상태 (saleStatus)</label>
-              <SearchBar
-                id="saleStatus"
+              <select
                 value={productData.saleStatus}
-                onChange={(val) => handleInputChange("saleStatus", val)}
-              />
+                onChange={e => handleInputChange("saleStatus", e.target.value)}
+                className="h-10 w-4/5 outline outline-1 mr-2 rounded p-2"
+              >
+                <option value="FOR_SALE">판매중</option>
+                <option value="OUT_OF_STOCK">품절</option>
+                <option value="DISCONTINUED">단종</option>
+                <option value="PREORDER">예약 판매</option>
+                <option value="BACKORDER">재입고 예정</option>
+                <option value="DELETED">삭제</option>
+              </select>
             </div>
 
             {/* 상품상태 (conditionStatus) */}
             <div className="col-span-1 my-2">
               <label className="block mb-1">상품상태 (conditionStatus)</label>
-              <SearchBar
-                id="conditionStatus"
+              <select
                 value={productData.conditionStatus}
-                onChange={(val) => handleInputChange("conditionStatus", val)}
-              />
+                onChange={e => handleInputChange("conditionStatus", e.target.value)}
+                className="h-10 w-4/5 outline outline-1 mr-2 rounded p-2"
+              >
+                <option value="NEW">새상품</option>
+                <option value="REFURBISHED">리퍼브</option>
+                <option value="DAMAGED">손상됨</option>
+                <option value="RETURNED">반품됨</option>
+                <option value="EXPIRED">유통기한 만료</option>
+              </select>
             </div>
 
             {/* 가격 (price) */}

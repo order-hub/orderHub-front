@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../../components/layout/Layout";
 import MenuButton from "../../components/common/MenuButton";
-import { Link, Outlet } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 const Product = () => {
     return (
@@ -23,8 +23,11 @@ const Product = () => {
                     <Link to="search">
                         <MenuButton>상품 검색</MenuButton>
                     </Link>
+                    <Link to="category">
+                        <MenuButton>상품 품목 관리</MenuButton>
+                    </Link>
                 </div>
-                <Outlet></Outlet>
+
             </div>
         </Layout>
     );
