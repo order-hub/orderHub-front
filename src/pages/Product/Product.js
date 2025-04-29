@@ -23,6 +23,9 @@ const Product = () => {
                     <Link to="search">
                         <MenuButton>상품 검색</MenuButton>
                     </Link>
+                    <Link to="category">
+                        <MenuButton>상품 품목 관리</MenuButton>
+                    </Link>
                 </div>
                 <Outlet></Outlet>
             </div>
