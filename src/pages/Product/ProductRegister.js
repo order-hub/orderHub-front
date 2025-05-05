@@ -112,6 +112,9 @@ const ProductRegister = () => {
       // [3] 완료 후 상태 초기화
       setProductData(INITIAL_STATE);
       setProductImage(null);
+      setSelectedMajor(null);
+      setSelectedMiddle(null);
+      setSelectedMinor(null);
     } catch (error) {
       console.error("등록 에러:", error);
       alert("상품 등록 중 오류가 발생했습니다.");
@@ -227,6 +230,7 @@ const ProductRegister = () => {
                 onChange={e => handleInputChange("saleStatus", e.target.value)}
                 className="h-10 w-4/5 outline outline-1 mr-2 rounded p-2"
               >
+                <option value="">선택</option>
                 <option value="FOR_SALE">판매중</option>
                 <option value="OUT_OF_STOCK">품절</option>
                 <option value="DISCONTINUED">단종</option>
@@ -244,6 +248,7 @@ const ProductRegister = () => {
                 onChange={e => handleInputChange("conditionStatus", e.target.value)}
                 className="h-10 w-4/5 outline outline-1 mr-2 rounded p-2"
               >
+                <option value="">선택</option>
                 <option value="NEW">새상품</option>
                 <option value="REFURBISHED">리퍼브</option>
                 <option value="DAMAGED">손상됨</option>

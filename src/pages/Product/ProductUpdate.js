@@ -3,16 +3,15 @@ import Layout from "../../components/layout/Layout";
 import SearchBar from "../../components/common/SearchBar";
 import SearchModal from "../../components/common/SearchModal";
 import Button from "../../components/common/Button";
+import { searchProduct } from "../../service/ProductService";
 
 
 const ProductUpdate = () => {
     const [productCode, setProductCode] = useState("");
     const [productName, setProductName] = useState("");
     const [isSearchOpen, setIsSearchOpen] = useState(false);
-    const [productData, setProductData] = useState({
-            productCode: "",
-            productName: ""
-        });
+    const [productList, setProductList] = useState([]);
+    
     
     const handleProductCodeChange = (text) => {
         setProductCode(text);
@@ -27,31 +26,32 @@ const ProductUpdate = () => {
         setIsSearchOpen(false);
     };
 
-    const handleSearchClick = () => {
-        console.log("검색 실행:", { productCode, productName });
-
-        const mockData = {
-            productCode: "12345",
-            productName: "테스트 상품",
+    const handleSearchClick = async () => {
+            try {
+                const response = await searchProduct(productCode, productName);
+                // 여러 상품을 배열로 변환
+                const products = response.content.map(item => {
+                    const { name, imageUrl, attributes, conditionStatus, saleStatus } = item;
+                    return {
+                        productCode: attributes?.productCode || "",
+                        productName: name || "",
+                        productCount: attributes?.productCount || "",
+                        productOrderCount: attributes?.productOrderCount || "",
+                        productOrderDay: attributes?.productOrderDay || "",
+                        productSale: attributes?.productSale || saleStatus || "",
+                        productStatus: attributes?.productStatus || conditionStatus || "",
+                        imageUrl: imageUrl || "",
+                    };
+                });
+                setProductList(products);
+            } catch (error) {
+                alert("일치하는 상품이 없습니다.");
+                setProductList([]);
+            } finally {
+                setProductCode("");
+                setProductName("");
+            }
         };
-
-        if (productCode === mockData.productCode || productName === mockData.productName) {
-            setProductData({
-                productCode: mockData.productCode,
-                productName: mockData.productName
-            });
-        } else {
-            alert("일치하는 상품이 없습니다.");
-            setProductData({
-                productCode: "",
-                productName: ""
-            });
-        }
-
-        setIsSearchOpen(false);
-        setProductCode("");
-        setProductName("");
-    };
     
     return(
         <Layout>
@@ -88,8 +88,8 @@ const ProductUpdate = () => {
 
             <div>
                 <ul className="flex bg-gray-100 ml-4 mr-4 mt-4 p-2">
-                    <li className="w-1/5 border-r border-gray-400 px-2">{productData.productCode}</li>
-                    <li className="w-1/5 border-r border-gray-400 px-2">{productData.productName}</li>
+                    <li className="w-1/5 border-r border-gray-400 px-2">{productCode}</li>
+                    <li className="w-1/5 border-r border-gray-400 px-2">{productName}</li>
                     <li className="w-1/5 border-r border-gray-400 px-2">
                     <select>
 						<option>정상</option>

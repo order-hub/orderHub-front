@@ -46,10 +46,11 @@ const ProductView = () => {
       //   id, name, categoryId, categoryName, saleStatus, conditionStatus,
       //   price, attributes, imageUrl
       // }
+      console.log(response);
 
       // 백엔드가 'attributes' 안에 { productCode, productCount, productOrderCount, ... } 를 넣는다고 가정
-      const { id, name, imageUrl, attributes, conditionStatus, saleStatus } = response;
-
+      const { id, name, imageUrl, attributes, conditionStatus, saleStatus } = response.content[0];
+      
       // 우리가 표시하고 싶은 필드들을 매핑
       setProductData({
         productCode: attributes?.productCode || "",      // 예: attributes에 productCode가 있다고 가정
